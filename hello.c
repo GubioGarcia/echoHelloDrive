@@ -1,20 +1,22 @@
-#include <linux/init.h>
-#include <linux/module.h>
-#include <linux/kernel.h>
-#include <linux/fs.h>
-#include <asm/uaccess.h>
-#include <linux/vmalloc.h>
-#include <linux/slab.h>
-#include <linux/device.h>
+#include <linux/init.h>       // Macros para inicialização e limpeza de módulos
+#include <linux/module.h>     // Funções específicas para módulos do kernel
+#include <linux/kernel.h>     // Macros e funções essenciais do kernel
+#include <linux/fs.h>         // Estruturas e funções relacionadas ao sistema de arquivos
+#include <asm/uaccess.h>      // Funções para copiar dados entre espaço do usuário e espaço do kernel
+#include <linux/vmalloc.h>    // Alocação de memória virtual contígua
+#include <linux/slab.h>       // Funções para alocar e liberar blocos de memória
+#include <linux/device.h>     // Abstração para representar dispositivos no sistema
 
+// Nome do dispositivo e classe
 #define NOME_DISPOSITIVO "echochar"
 #define NOME_CLASSE "echo"
 
-MODULE_LICENSE("GPL");
+MODULE_LICENSE("GPL"); // Licença para o modulo
 MODULE_AUTHOR("Gubio Garcia");
 MODULE_DESCRIPTION("Driver simples de dispositivo de caractere Linux para echo");
 MODULE_VERSION("0.1");
 
+// Parâmetro do módulo para configurar o nome
 static char *nome = "echoChar";
 module_param(nome, charp, S_IRUGO);
 MODULE_PARM_DESC(nome, "O nome a ser exibido no /var/log/kern.log");
